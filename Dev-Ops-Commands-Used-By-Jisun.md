@@ -2,24 +2,24 @@
 
 ## Configuring a Domain with Nginx
 
-### Step 1: Create Directory for Backoffice
+### Step 1: Create Directory for Subdomain
 ```bash
-sudo mkdir -p /var/www/backoffice.symamlaw.com
-sudo chown -R $USER:$USER /var/www/backoffice.symamlaw.com
+sudo mkdir -p /var/www/subdomain.abcd.com
+sudo chown -R $USER:$USER /var/www/subdomain.abcd.com
 sudo chmod -R 755 /var/www
 ```
 
 ### Step 2: Configure Nginx Sites
 Edit the configuration file:
 ```bash
-sudo nano /etc/nginx/sites-available/admin.symamlaw.com
+sudo nano /etc/nginx/sites-available/admin.abcd.com
 ```
 
 Add the following configuration:
 ```nginx
 server {
     listen 80;
-    server_name admin.symamlaw.com;
+    server_name admin.abcd.com;
 
     location / {
         proxy_pass http://localhost:3000;
@@ -33,7 +33,7 @@ server {
 
 server {
     listen 80;
-    server_name backoffice.symamlaw.com;
+    server_name backoffice.abcd.com;
 
     root /path/to/your/laravel/project/public;
     index index.php index.html index.htm;
@@ -56,9 +56,9 @@ server {
 
 server {
     listen 80;
-    server_name backoffice.symamlaw.com;
+    server_name backoffice.abcd.com;
 
-    root /var/www/backoffice.symamlaw.com;
+    root /var/www/backoffice.abcd.com;
     index index.html index.htm index.php;
 
     location / {
@@ -83,7 +83,7 @@ Ctrl + O -> Enter -> Ctrl + X
 
 ### Step 3: Enable the Site and Restart Nginx
 ```bash
-sudo ln -s /etc/nginx/sites-available/admin.symamlaw.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/admin.abcd.com /etc/nginx/sites-enabled/
 sudo systemctl restart nginx
 sudo systemctl status nginx.service  # Check Nginx status
 sudo nginx -t                       # Test Nginx configuration
