@@ -125,6 +125,20 @@ sudo rm /etc/nginx/sites-enabled/srv633348.hstgr.cloud
   ```bash
   tmux attach-session -t your_session_name
   ```
+- **Kill an Existing Session:**
+  ```bash
+  tmux kill-session -t <session-name>
+  ```
+- **Create a New Window (Tab):**
+While inside the tmux session, press: 
+  Press `Ctrl + B`, then `C`.
+
+- **Switch Between Windows**
+To move between windows (tabs):
+
+Next window: Press `Ctrl + B`, then `N`.
+Previous window: Press `Ctrl + B`, then `P`.
+Select a specific window by number: Press `Ctrl + B`, then the `window number`.
 
 - **Detach from a Session (Keep Running):**
   Press `Ctrl + B`, then `D`.
