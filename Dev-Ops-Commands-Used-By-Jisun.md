@@ -188,3 +188,73 @@ sudo apt install php8.1-fpm php-mysql
 ```bash
 sudo apt-get install build-essential
 ```
+
+# Deployment Guide for Next.js with Docker
+
+## Docker Commands
+
+### List Docker Images
+```sh
+docker images
+```
+
+### Remove Unused/Dangling Images
+```sh
+docker image prune -a
+```
+
+### List Running Containers
+```sh
+docker ps
+```
+
+### View Logs of Running Container
+```sh
+docker logs next-app
+```
+
+### Build Docker Image
+```sh
+docker build -t otonest-frontend .
+```
+
+### Stop the Running Container
+```sh
+docker stop next-app
+```
+
+### Remove Docker Container
+```sh
+docker rm next-app
+```
+
+### Remove Unused Image
+```sh
+docker rmi <Image ID>
+```
+
+### Run Docker Container
+```sh
+docker run -d -p 3003:3003 --name next-app otonest-frontend
+```
+
+---
+
+## After Pulling from Git
+```sh
+cd ~/project-directory
+git pull origin main
+docker build -t otonest-frontend .
+docker stop next-app
+docker rm next-app
+docker run -d -p 3003:3003 --name next-app otonest-frontend
+docker ps
+docker logs next-app
+```
+
+### Notes
+- Ensure your Dockerfile is correctly configured before building the image.
+- Run `docker logs next-app` to check if the container is running properly.
+- Use `docker ps -a` to view all containers, including stopped ones.
+- Clean up unused images periodically with `docker image prune -a` to save space.
+
