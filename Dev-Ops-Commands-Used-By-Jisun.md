@@ -258,3 +258,133 @@ docker logs next-app
 - Use `docker ps -a` to view all containers, including stopped ones.
 - Clean up unused images periodically with `docker image prune -a` to save space.
 
+# PM2 Process Manager – Common Commands Guide
+
+[PM2](https://pm2.keymetrics.io/) is a powerful production process manager for Node.js applications that allows you to keep apps alive forever and reload them without downtime.
+
+---
+
+## 🚀 Installation
+
+```
+npm install -g pm2
+```
+
+---
+
+## ⚙️ Running an App on a Custom Port
+
+To run your app on a **custom port** (e.g., `PORT=5000`), use:
+
+```
+PORT=5000 pm2 start app.js --name my-app
+```
+
+> Replace `app.js` with your app's entry file.
+
+---
+
+## 📦 Common PM2 Commands
+
+### ▶️ Start an App
+
+```
+pm2 start app.js --name my-app
+```
+
+### ♻️ Restart an App
+
+```
+pm2 restart my-app
+```
+
+### ⏹ Stop an App
+
+```
+pm2 stop my-app
+```
+
+### ❌ Delete an App
+
+```
+pm2 delete my-app
+```
+
+### 📋 List All Processes
+
+```
+pm2 list
+```
+
+### 🔍 View Logs
+
+```
+pm2 logs my-app
+```
+
+Or all logs:
+
+```
+pm2 logs
+```
+
+### 📈 Monitor Performance (CPU/Memory)
+
+```
+pm2 monit
+```
+
+---
+
+## 💾 Saving and Auto-Restart on Reboot
+
+### Save current process list:
+
+```
+pm2 save
+```
+
+### Generate startup script for reboot:
+
+```
+pm2 startup
+```
+
+Then follow the instructions it prints (copy and run the given command).
+
+---
+
+## 🛠 Update PM2
+
+```
+pm2 update
+```
+
+---
+
+## 🧼 Reset All PM2 Data
+
+```
+pm2 reset all
+```
+
+---
+
+## 📄 Helpful Tips
+
+* Use `.env` files with packages like [dotenv](https://www.npmjs.com/package/dotenv) to manage custom ports and other variables.
+* You can also run JSON ecosystem files with:
+
+```
+pm2 start ecosystem.config.js
+```
+
+---
+
+## 📚 Documentation
+
+Official Docs: [https://pm2.keymetrics.io/docs/usage/quick-start/](https://pm2.keymetrics.io/docs/usage/quick-start/)
+
+---
+
+
