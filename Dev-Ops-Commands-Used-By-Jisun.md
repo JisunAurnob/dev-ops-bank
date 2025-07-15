@@ -387,4 +387,20 @@ Official Docs: [https://pm2.keymetrics.io/docs/usage/quick-start/](https://pm2.k
 
 ---
 
+# Upload and Extract ZIP on VPS via SCP
+
+This guide explains how to upload a `.zip` file from your local machine to a VPS and extract it in the desired directory.
+
+## 🛠️ Requirements
+
+- SSH access to your VPS
+- `scp` installed on your local machine
+- `unzip` installed on the VPS (`sudo apt install unzip`)
+
+## 📤 Upload ZIP to VPS
+
+Use the following command from your local terminal:
+
+```bash
+scp /path/to/your-file.zip youruser@your-vps-ip:/target/directory/
 
