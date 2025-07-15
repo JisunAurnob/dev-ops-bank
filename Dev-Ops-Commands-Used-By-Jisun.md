@@ -402,5 +402,5 @@ This guide explains how to upload a `.zip` file from your local machine to a VPS
 Use the following command from your local terminal:
 
 ```bash
-scp /path/to/your-file.zip youruser@your-vps-ip:/target/directory/
+scp C:\Users\Asus\Downloads\yourfilename.zip youruser@your-vps-ip:/target/directory/
 
