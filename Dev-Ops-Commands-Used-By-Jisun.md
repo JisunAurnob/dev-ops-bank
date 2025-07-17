@@ -362,6 +362,14 @@ pm2 update
 
 ---
 
+## 🧼 Reload a specific pm2
+
+```
+pm2 reload pm2-instance-name(project name)
+```
+
+---
+
 ## 🧼 Reset All PM2 Data
 
 ```
