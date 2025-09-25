@@ -561,10 +561,3 @@ php artisan horizon
 5. Use Supervisor to keep workers running automatically.
 
 This ensures your Laravel jobs are processed **reliably in the background**.
-
-```
-
----
-
-Do you want me to also include a **sample job class + dispatch example** inside this README so you (or your teammates) can immediately test the queue setup after following the steps?
-```
