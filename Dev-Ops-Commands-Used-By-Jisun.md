@@ -412,3 +412,158 @@ Use the following command from your local terminal:
 ```bash
 scp C:\Users\Asus\Downloads\yourfilename.zip youruser@your-vps-ip:/target/directory/
 
+````markdown
+# Laravel Queue Worker Setup on VPS
+
+This guide explains how to configure and run Laravel job queues on a VPS using **Supervisor** for process management.  
+
+---
+
+## 🔹 Step 1: Configure Laravel Queue
+
+### 1.1 Migration for Jobs Table
+Run the following to create the `jobs` table:
+
+```bash
+php artisan queue:table
+php artisan migrate
+````
+
+### 1.2 Update `.env`
+
+Set the queue driver to database:
+
+```env
+QUEUE_CONNECTION=database
+```
+
+> If using Redis, set `QUEUE_CONNECTION=redis` and install Redis.
+
+---
+
+## 🔹 Step 2: Test Queue Locally
+
+Before setting up Supervisor, test that your queue works:
+
+```bash
+php artisan queue:work
+```
+
+This will start processing jobs in real time. Stop it with `CTRL + C`.
+
+---
+
+## 🔹 Step 3: Install Supervisor
+
+Supervisor is a process monitor that ensures your queue worker keeps running even after crashes or reboots.
+
+Install Supervisor:
+
+```bash
+sudo apt update
+sudo apt install supervisor -y
+```
+
+---
+
+## 🔹 Step 4: Configure Supervisor
+
+Create a config file at `/etc/supervisor/conf.d/laravel-worker.conf`:
+
+```ini
+[program:laravel-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /var/www/html/your-laravel-project/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+autostart=true
+autorestart=true
+user=www-data
+numprocs=1
+redirect_stderr=true
+stdout_logfile=/var/www/html/your-laravel-project/storage/logs/worker.log
+stopwaitsecs=3600
+```
+
+> ⚠️ Replace `/var/www/html/your-laravel-project` with the actual path of your Laravel project.
+
+---
+
+## 🔹 Step 5: Enable Supervisor Config
+
+Run the following commands:
+
+```bash
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start laravel-worker:*
+```
+
+---
+
+## 🔹 Step 6: Manage Worker
+
+* Check status:
+
+  ```bash
+  sudo supervisorctl status
+  ```
+* Stop worker:
+
+  ```bash
+  sudo supervisorctl stop laravel-worker:*
+  ```
+* Restart worker:
+
+  ```bash
+  sudo supervisorctl restart laravel-worker:*
+  ```
+
+---
+
+## 🔹 Step 7: Logs
+
+* Worker logs:
+
+  ```
+  storage/logs/worker.log
+  ```
+* Laravel logs:
+
+  ```
+  storage/logs/laravel.log
+  ```
+
+---
+
+## 🔹 Optional: Redis + Horizon
+
+If you want real-time monitoring and more control:
+
+```bash
+composer require laravel/horizon
+php artisan horizon
+```
+
+Then replace `queue:work` in Supervisor with:
+
+```bash
+php artisan horizon
+```
+
+---
+
+## ✅ Summary
+
+1. Configure queue driver (Database/Redis).
+2. Test with `php artisan queue:work`.
+3. Install Supervisor.
+4. Add config at `/etc/supervisor/conf.d/laravel-worker.conf`.
+5. Use Supervisor to keep workers running automatically.
+
+This ensures your Laravel jobs are processed **reliably in the background**.
+
+```
+
+---
+
+Do you want me to also include a **sample job class + dispatch example** inside this README so you (or your teammates) can immediately test the queue setup after following the steps?
+```
