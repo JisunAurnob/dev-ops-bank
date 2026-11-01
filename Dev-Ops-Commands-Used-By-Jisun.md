@@ -88,6 +88,41 @@ sudo systemctl restart nginx
 sudo systemctl status nginx.service  # Check Nginx status
 sudo nginx -t                       # Test Nginx configuration
 ```
+---
+
+## Give basic permissions to laravel application
+
+Set ownership
+```bash
+sudo chown -R www-data:www-data /var/www/laravel-project-folder
+```
+Set directory permissions
+```bash
+sudo find /var/www/hatipara-ss-hospital -type d -exec chmod 755 {} \;
+```
+This allows:
+* Owner: Read, write, execute
+* Group: Read, execute
+* Others: Read, execute
+  
+Set file permissions
+```bash
+sudo find /var/www/hatipara-ss-hospital -type f -exec chmod 644 {} \;
+```
+
+Set Laravel writable directory permissions
+```bash
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R 775 storage bootstrap/cache
+```
+
+Secure the .env file
+```bash
+sudo chown www-data:www-data .env
+sudo chmod 600 .env
+```
+This allows only www-data to read and modify it.
+---
 
 ### Additional Configuration
 Remove unnecessary sites:
@@ -548,6 +583,16 @@ Then replace `queue:work` in Supervisor with:
 
 ```bash
 php artisan horizon
+```
+
+---
+
+## Other Basic Comments
+
+Remove a directory
+
+```bash
+rm -rf folder_name
 ```
 
 ---
