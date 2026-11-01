@@ -623,7 +623,9 @@ Remove a directory
 ```bash
 rm -rf folder_name
 ```
-
+```bash
+php artisan storage:link
+```
 ---
 
 ## ✅ Summary
