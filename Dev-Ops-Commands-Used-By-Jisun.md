@@ -84,9 +84,9 @@ Ctrl + O -> Enter -> Ctrl + X
 ### Step 3: Enable the Site and Restart Nginx
 ```bash
 sudo ln -s /etc/nginx/sites-available/admin.abcd.com /etc/nginx/sites-enabled/
+sudo nginx -t                       # Test Nginx configuration
 sudo systemctl restart nginx
 sudo systemctl status nginx.service  # Check Nginx status
-sudo nginx -t                       # Test Nginx configuration
 ```
 ---
 
