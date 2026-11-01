@@ -215,6 +215,35 @@ sudo mysql_secure_installation
 sudo apt install php8.1-fpm php-mysql
 ```
 
+### Mysql Basic Commands
+
+Enter MariaDB/Mysql
+```bash
+sudo mariadb / sudo mysql
+```
+Create the database
+```bash
+CREATE DATABASE laravel_app
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+```
+
+Create a dedicated user:
+```bash
+CREATE USER 'laravel_user'@'localhost'
+IDENTIFIED BY 'REPLACE_WITH_STRONG_PASSWORD';
+```
+
+Grant access:
+```bash
+GRANT ALL PRIVILEGES ON laravel_app.*
+TO 'laravel_user'@'localhost';
+```
+
+Exit:
+```bash
+EXIT;
+```
 ---
 
 ## Other Useful Commands
