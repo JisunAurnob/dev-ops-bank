@@ -98,7 +98,7 @@ sudo chown -R www-data:www-data /var/www/laravel-project-folder
 ```
 Set directory permissions
 ```bash
-sudo find /var/www/hatipara-ss-hospital -type d -exec chmod 755 {} \;
+sudo find /var/www/laravel-project-folder -type d -exec chmod 755 {} \;
 ```
 This allows:
 * Owner: Read, write, execute
@@ -107,7 +107,7 @@ This allows:
   
 Set file permissions
 ```bash
-sudo find /var/www/hatipara-ss-hospital -type f -exec chmod 644 {} \;
+sudo find /var/www/laravel-project-folder -type f -exec chmod 644 {} \;
 ```
 
 Set Laravel writable directory permissions
